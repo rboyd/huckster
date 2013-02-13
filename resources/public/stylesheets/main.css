@@ -1,0 +1,16 @@
+body {
+  background-image: url("/images/arches.png");
+  font-size: 100%;
+  line-height: 1.125em; }
+
+.container {
+  width: 640px;
+  height: 480px;
+  background-color: white;
+  overflow: auto;
+  padding-top: 30px;
+  margin: 0 auto;
+  -moz-border-radius: 15px;
+  border-radius: 15px; }
+  .container form label {
+    display: block; }

@@ -1,0 +1,34 @@
+body {
+  background-image: url("/images/arches.png");
+  font-size: 100%;
+  line-height: 1.125em; }
+
+.container {
+  width: 640px;
+  height: 480px;
+  background-color: #3366ff;
+  overflow: auto;
+  margin: 0 auto;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  background-image: url("/images/creampaper.png"); }
+  .container #card {
+    margin-top: 48px;
+    margin-left: 64px;
+    width: 512px;
+    height: 336px;
+    font-family: Century Gothic, sans-serif;
+    line-height: 1em;
+    font-size: 3em; }
+  .container .controller {
+    background-color: #0040ff;
+    height: 35px;
+    width: 576px;
+    margin: 30px auto; }
+    .container .controller #next img {
+      margin-top: 5px;
+      margin-right: 20px;
+      float: right; }
+    .container .controller #prev img {
+      margin-top: 5px;
+      margin-left: 20px; }

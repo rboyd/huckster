@@ -1,6 +1,18 @@
 (ns huckster.core
-  (:require [immutant.web :as web]
+  (:use compojure.core)
+  (:require [compojure.handler :as handler]
+            [compojure.route :as route]
+            [ring.util.response :as resp]
+            [immutant.web :as web]
+            [net.cgrand.enlive-html :as html]
             [huckster.db :as db]))
+
+(defroutes app-routes
+  (let [index (html/html-resource (java.io.StringReader. (slurp "resources/public/index.html")))]
+    
+  
+    (GET "/" [] (resp/resource-response "index.html" {:root "public"})))
+  (route/resources "/"))
 
 (defn make-handler  [sub-context]
   (fn [{:keys [context path-info] :as request}]
@@ -12,7 +24,4 @@
                     :request-path-info path-info})}))
 
 (defn init []
-  ;; responds to /foo/
-  (web/start "/" (make-handler "/"))
-  ;; responds to /foo/bar/
-  (web/start "/bar" (make-handler "/bar")))
+  (web/start "/" app-routes))

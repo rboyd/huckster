@@ -1,0 +1,19 @@
+!!! 5
+%html
+  %head
+    %link{"rel" => "stylesheet", "href" => "stylesheets/main.css", "type" => "text/css"}
+    %title Domain
+  %body
+    .container
+      Great name, right?
+      %span#domain
+      is for sale.
+      Make an offer and we'll get back to you.
+      %form#offer-box
+        %label
+          Your Email:
+          %input{type: "text", name: "email"}
+        %label
+          Your Offer:
+          %input{type: "text", name: "offer"}
+        %input{type: "submit"}
