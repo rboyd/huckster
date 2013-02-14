@@ -1,5 +1,7 @@
 # huckster
 
+![Huckster Preview Image](https://raw.github.com/wiki/rboyd/huckster/images/huckster-preview.png)
+
 Huckster is a web application designed to let you list domains for sale
 and field offers from interested parties. It runs on
 [Immutant](http://immutant.org) and stores data in
