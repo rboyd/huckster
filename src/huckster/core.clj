@@ -3,6 +3,7 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [ring.util.response :refer [response]]
+            [ring.middleware.params :refer [wrap-params]]
             [immutant.web :as web]
             [net.cgrand.enlive-html :as html]
             [huckster.db :as db]))
@@ -26,16 +27,11 @@
        (do
          (db/save-hit remote-addr server-name)
          (render-to-response (index {:domain server-name}))))
+  (POST "/offers" {:keys [server-name remote-addr params]}
+        (do
+          (db/save-offer remote-addr server-name (params "email") (params "offer"))
+          (response "Thank you.")))
   (route/resources "/"))
 
-(defn make-handler  [sub-context]
-  (fn [{:keys [context path-info] :as request}]
-    (db/save-hit (:remote-addr request) (:server-name request))
-    {:status 200
-     :content-type "text/plain"
-     :body (pr-str {:mounted-sub-context sub-context
-                    :request-context context
-                    :request-path-info path-info})}))
-
 (defn init []
-  (web/start "/" app-routes))
+  (web/start "/" (wrap-params app-routes)))

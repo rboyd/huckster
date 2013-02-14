@@ -9,7 +9,7 @@
       %span#domain
       is for sale.
       Make an offer and we'll get back to you.
-      %form#offer-box
+      %form#offer-box{method: "post", action: "/offers"}
         %label
           Your Email:
           %input{type: "text", name: "email"}
