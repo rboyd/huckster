@@ -6,7 +6,8 @@
             [ring.middleware.params :refer [wrap-params]]
             [immutant.web :as web]
             [net.cgrand.enlive-html :as html]
-            [huckster.db :as db]))
+            [huckster.db :as db]
+            [huckster.alert :as alert]))
 
 (defn domain-from-hostname [hostname]
   (let [[tld sld & rest] (reverse (clojure.string/split hostname #"\."))]
@@ -28,9 +29,13 @@
          (db/save-hit remote-addr server-name)
          (render-to-response (index {:domain server-name}))))
   (POST "/offers" {:keys [server-name remote-addr params]}
-        (do
-          (db/save-offer remote-addr server-name (params "email") (params "offer"))
-          (response "Thank you.")))
+        (let [domain server-name
+              email (params "email")
+              offer (params "offer")]
+          (do
+            (db/save-offer remote-addr server-name email offer)
+            (alert/sms (str email " offered " offer " for " domain))
+            (response "Thank you."))))
   (route/resources "/"))
 
 (defn init []
