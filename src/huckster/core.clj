@@ -1,13 +1,13 @@
 (ns huckster.core
   (:use compojure.core)
-  (:require [compojure.handler :as handler]
-            [compojure.route :as route]
-            [ring.util.response :refer [response]]
-            [ring.middleware.params :refer [wrap-params]]
+  (:require [huckster.db :as db]
             [immutant.web :as web]
+            [huckster.alert :as alert]
+            [compojure.route :as route]
+            [compojure.handler :as handler]
             [net.cgrand.enlive-html :as html]
-            [huckster.db :as db]
-            [huckster.alert :as alert]))
+            [ring.util.response :refer [response]]
+            [ring.middleware.params :refer [wrap-params]]))
 
 (defn domain-from-hostname [hostname]
   (let [[tld sld & rest] (reverse (clojure.string/split hostname #"\."))]
