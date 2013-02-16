@@ -34,7 +34,8 @@
               offer (params "offer")]
           (do
             (db/save-offer remote-addr server-name email offer)
-            (alert/sms (str email " offered " offer " for " domain))
+            (if-not (clojure.string/blank? offer)
+              (alert/sms (str email " offered " offer " for " domain)))
             (response "Thank you."))))
   (route/resources "/"))
 
