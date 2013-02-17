@@ -7,7 +7,9 @@
                  [org.immutant/immutant "0.8.0"]
                  [com.novemberain/monger "1.4.2"]
                  [compojure "1.1.5"]
-                 [enlive "1.0.1"]]
+                 [enlive "1.0.1"]
+                 [clj-http "0.6.4"]
+                 [clj-time "0.4.4"]]
 
   :immutant {:init huckster.core/init
              :nrepl-port 4343

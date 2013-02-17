@@ -1,6 +1,7 @@
 (ns huckster.db
   (:require [monger.core :as mg]
-            [monger.collection :as mgc])
+            [monger.collection :as mgc]
+            [clj-time.format])
   (:import [org.bson.types ObjectId]))
 
 (mg/connect!)
