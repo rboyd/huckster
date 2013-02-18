@@ -3,6 +3,7 @@
   (:require [huckster.db :as db]
             [immutant.web :as web]
             [huckster.alert :as alert]
+            [huckster.piwik :as piwik]
             [compojure.route :as route]
             [compojure.handler :as handler]
             [net.cgrand.enlive-html :as html]
@@ -20,14 +21,15 @@
 (defn render [t]
   (apply str t))
 
-(def render-to-response
-     (comp response render))
-
 (defroutes app-routes
   (GET "/" {:keys [server-name remote-addr]}
-       (do
+       (let [resp   (render (index {:domain server-name}))
+             domain (domain-from-hostname server-name)]
          (db/save-hit remote-addr server-name)
-         (render-to-response (index {:domain server-name}))))
+         (-> (if (contains? @piwik/site-map domain)
+               (clojure.string/replace resp #"</body>" (str (piwik/emit-script domain) "</body>"))
+               resp)
+             response)))
   (POST "/offers" {:keys [server-name remote-addr params]}
         (let [domain server-name
               email (params "email")
