@@ -32,3 +32,16 @@
     (-> (slurp "resources/templates/piwik/tracker.js")
         (clojure.string/replace #"\{PIWIK_HOST\}" piwik-host)
         (clojure.string/replace #"\{SITE_ID\}" site-id))))
+
+(defn add-site
+  "Add a site to Piwik via the API."
+  [domain]
+  (let [config (registry/get :config)
+        url    (:piwik-url config)
+        token  (:piwik-token config)
+        query  {:module "API"
+                :method "SitesManager.addSite"
+                :format "JSON"
+                :siteName domain
+                :urls [(str "http://" domain "/")]}]
+    (client/post url {:query-params (merge query {:token_auth token})})))
