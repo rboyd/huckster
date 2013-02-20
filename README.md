@@ -1,11 +1,12 @@
 # huckster
 
-![Huckster Preview Image](https://raw.github.com/wiki/rboyd/huckster/images/huckster-preview.png)
+Huckster is a web application that lets you self-host landing pages for your domain portfolio. It serves up a customizable form so that any potential buyers can see leave contact and offer information. Huckster integrates with [Piwik](https://github.com/piwik/piwik) to collect visitor statistics. Huckster can also alert you via SMS when an offer is received.
 
-Huckster is a web application designed to let you list domains for sale
-and field offers from interested parties. It runs on
-[Immutant](http://immutant.org) and stores data in
-[MongoDB](http://www.mongodb.org).
+The overarching principle is to maximize portfolio control and surface relevant data when it becomes actionable.
+
+Huckster can serve large volumes of domain names on low-cost cloud infrastructure. If your portfolio is too small to monetize via parking services and you want to collect analytics while presenting a clear call-to-action to buyers, huckster is probably for you.
+
+![Huckster Preview Image](https://raw.github.com/wiki/rboyd/huckster/images/huckster-preview.png)
 
 You install huckster by deploying it under Immutant. Refer to the
 Immutant documentation for more info.
