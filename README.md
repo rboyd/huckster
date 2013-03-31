@@ -1,5 +1,9 @@
 # huckster
 
+> Money is in some respects life's fire: it is a very excellent servant, but a terrible master.
+
+> -- *P. T. Barnum*
+
 Huckster is a web application that lets you self-host landing pages for your domain portfolio. It serves up a customizable form so that any potential buyers can see leave contact and offer information. Huckster integrates with [Piwik](https://github.com/piwik/piwik) to collect visitor statistics. Huckster can also alert you via SMS when an offer is received.
 
 The overarching principle is to maximize portfolio control and surface relevant data when it becomes actionable.
