@@ -35,6 +35,7 @@
               email (params "email")
               offer (params "offer")]
           (do
+            (println params)
             (db/save-offer remote-addr server-name email offer)
             (if-not (clojure.string/blank? offer)
               (alert/sms (str email " offered " offer " for " domain)))
@@ -43,4 +44,4 @@
 
 (defn -main
   [& args]
-  (run-jetty app {:port 3000}))
+  (run-jetty (wrap-params app) {:port 3000}))
