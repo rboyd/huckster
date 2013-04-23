@@ -1,7 +1,7 @@
 (ns huckster.core
   (:use compojure.core)
+  (:use ring.adapter.jetty)
   (:require [huckster.db :as db]
-            [immutant.web :as web]
             [huckster.alert :as alert]
             [huckster.piwik :as piwik]
             [compojure.route :as route]
@@ -21,7 +21,7 @@
 (defn render [t]
   (apply str t))
 
-(defroutes app-routes
+(defroutes app
   (GET "/" {:keys [server-name remote-addr]}
        (let [resp   (render (index {:domain server-name}))
              domain (domain-from-hostname server-name)]
@@ -41,5 +41,6 @@
             (response "Thank you."))))
   (route/resources "/"))
 
-(defn init []
-  (web/start "/" (wrap-params app-routes)))
+(defn -main
+  [& args]
+  (run-jetty app {:port 3000}))

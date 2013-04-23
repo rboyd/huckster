@@ -1,14 +1,13 @@
 (ns huckster.piwik
   (:require [clj-http.client :as client]
             [clojure.data.json :as json]
-            [immutant.registry :as registry]))
+            [environ.core :refer [env]]))
 
 (defn get-sites
   "Gets a map of all sites registered with piwik."
   []
-  (let [config (registry/get :config)
-        url    (:piwik-url config)
-        token  (:piwik-token config)
+  (let [url    (env :piwik-url)
+        token  (env :piwik-token)
         query  {:module "API"
                 :method "SitesManager.getAllSites"
                 :format "JSON"}]
@@ -26,8 +25,7 @@
 (defn emit-script
   "Given a piwik hostname and a site id, generates the tracking code."
   [name]
-  (let [config     (registry/get :config)
-        piwik-host (:piwik-host config)
+  (let [piwik-host (env :piwik-host)
         site-id    (@site-map name)]
     (-> (slurp "resources/templates/piwik/tracker.js")
         (clojure.string/replace #"\{PIWIK_HOST\}" piwik-host)
@@ -36,9 +34,8 @@
 (defn add-site
   "Add a site to Piwik via the API."
   [domain]
-  (let [config (registry/get :config)
-        url    (:piwik-url config)
-        token  (:piwik-token config)
+  (let [url    (env :piwik-url)
+        token  (env :piwik-token)
         query  {:module "API"
                 :method "SitesManager.addSite"
                 :format "JSON"

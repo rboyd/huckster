@@ -1,15 +1,14 @@
 (ns huckster.alert
   (:require [clj-http.client :as client]
-            [immutant.registry :as registry]))
+            [environ.core :refer [env]]))
 
 (defn sms
   "Sends an SMS alert via Twilio."
   [body]
-  (let [config        (registry/get :config)
-        twilio-sid    (:twilio-sid config)
-        twilio-token  (:twilio-token config)
-        twilio-number (:twilio-number config)
-        owner-number  (:owner-number config)
+  (let [twilio-sid    (env :twilio-sid)
+        twilio-token  (env :twilio-token)
+        twilio-number (env :twilio-number)
+        owner-number  (env :owner-number)
         api-base "https://api.twilio.com/2010-04-01/Accounts/"
         url (str api-base twilio-sid "/SMS/Messages.json")]
     (client/post url
