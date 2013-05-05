@@ -12,6 +12,11 @@ Huckster can serve large volumes of domain names on low-cost cloud infrastructur
 
 ![Huckster Preview Image](https://raw.github.com/wiki/rboyd/huckster/images/huckster-preview.png)
 
+# Installation / Usage
+
+Huckster is a Clojure app. Install with [leiningen](https://github.com/technomancy/leiningen). Have an instance of MongoDB running, and run with ```lein run```.
+
+
 ## License
 
 Copyright © 2013 Robert Boyd
